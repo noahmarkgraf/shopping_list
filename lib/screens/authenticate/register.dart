@@ -3,16 +3,17 @@ import 'package:shopping_list/services/auth.dart';
 import 'package:shopping_list/shared/constants.dart';
 import 'package:shopping_list/shared/loading.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
 
   final Function toggleView;
-  SignIn({ this.toggleView });
+  Register({ this.toggleView });
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
+
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -31,11 +32,11 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Anmelden'),
+        title: Text('Registrieren'),
         actions: [
           FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Registrieren'),
+            label: Text('Anmelden'),
             onPressed: (){
               widget.toggleView();
             },
@@ -69,16 +70,16 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 color: Colors.pink[400],
                 child: Text(
-                  'Anmelden',
+                  'Registrieren',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     setState(() => loading = true);
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                     if(result == null) {
                       setState(() {
-                        error = 'could not sign in';
+                        error = 'please supply a valid email';
                         loading = false;
                       });
                     }

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shopping_list/models/user.dart';
-import 'package:shopping_list/models/user_settings.dart';
 import 'package:shopping_list/services/database.dart';
 
 

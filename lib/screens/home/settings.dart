@@ -4,7 +4,6 @@ import 'package:shopping_list/models/user_settings.dart';
 import 'package:shopping_list/services/auth.dart';
 import 'package:shopping_list/services/database.dart';
 import 'package:shopping_list/shared/constants.dart';
-import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
   @override

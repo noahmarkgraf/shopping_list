@@ -12,9 +12,6 @@ void main() => runApp(App());
 
 
 class App extends StatelessWidget {
-
-  int loginCounter = 0;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +30,6 @@ class App extends StatelessWidget {
 
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
-            loginCounter ++;
             return StreamProvider<MyUser>.value(
               initialData: MyUser(),
               value: AuthService().user,

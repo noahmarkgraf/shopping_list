@@ -22,6 +22,7 @@ class _RegisterState extends State<Register> {
   //text field state
   String email = '';
   String password = '';
+  String name = '';
   String error = '';
 
 
@@ -67,23 +68,20 @@ class _RegisterState extends State<Register> {
         child: Column(
           children: [
             SizedBox(height: 40.0),
-            
-            Row(
-              children: [
-                Image.asset(
-                  'assets/shopping-bag-rose.png',
-                  height: 60.0,
-                  width: 60.0,
-                ),
-                SizedBox(width: 20.0),
-                Text(
-                  'Registrieren',
-                  style: TextStyle(
-                    fontSize: 40.0,
-                  ),
-                ),
-              ],
+           
+            Image.asset(
+              'assets/shopping-bag-rose.png',
+              height: 60.0,
+              width: 60.0,
             ),
+            SizedBox(width: 20.0),
+            Text(
+              'Registrieren',
+              style: TextStyle(
+                fontSize: 40.0,
+              ),
+            ),
+              
             SizedBox(height: 40.0),
             TextFormField(
               decoration: textInputDecoration.copyWith(hintText: 'Email'),
@@ -102,6 +100,14 @@ class _RegisterState extends State<Register> {
               },
             ),
             SizedBox(height: 20.0),
+            TextFormField(
+              decoration: textInputDecoration.copyWith(hintText: 'Name'),
+              validator: (val) => val.isEmpty ? 'Enter a name' : null,
+              onChanged: (val) {
+                setState(() => name = val);
+              },
+            ),
+            SizedBox(height: 20.0),
             RaisedButton(
               padding: EdgeInsets.symmetric(horizontal: 70),
               shape: RoundedRectangleBorder(
@@ -115,7 +121,7 @@ class _RegisterState extends State<Register> {
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   setState(() => loading = true);
-                  dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                  dynamic result = await _auth.registerWithEmailAndPassword(email, password, name);
                   if(result == null) {
                     setState(() {
                       error = 'please supply a valid email';
@@ -137,17 +143,17 @@ class _RegisterState extends State<Register> {
             Row(
               children: [
                 Expanded(
-                    child: Divider(
-                  thickness: 2.0,
-                  indent: 20.0,
-                  endIndent: 20.0,
+                  child: Divider(
+                    thickness: 2.0,
+                    indent: 20.0,
+                    endIndent: 20.0,
                 )),
                 Text('OR'),
                 Expanded(
-                    child: Divider(
-                  thickness: 2.0,
-                  indent: 20.0,
-                  endIndent: 20.0,
+                  child: Divider(
+                    thickness: 2.0,
+                    indent: 20.0,
+                    endIndent: 20.0,
                 )),
               ],
             ),

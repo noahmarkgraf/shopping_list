@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shopping_list/models/user.dart';
+import 'package:shopping_list/models/user_settings.dart';
 import 'package:shopping_list/services/database.dart';
 
 
@@ -65,13 +66,14 @@ class AuthService {
 
 
   //register with email and password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(String email, String password, String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User user = result.user;
 
       //create a new document with user uid
-      await DatabaseService(uid: user.uid).updateUserSettings(null);
+      UserSettings userSettings = UserSettings(name: name, uid: user.uid);
+      await DatabaseService(uid: user.uid).updateUserSettings(userSettings);
       return _userFromFirebase(user);
     } catch(e) {
       print(e.toString());

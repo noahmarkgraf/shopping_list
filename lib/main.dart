@@ -7,6 +7,8 @@ import 'package:shopping_list/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/services/auth.dart';
 import 'package:shopping_list/shared/loading.dart';
+import 'package:shopping_list/models/user_settings.dart';
+
 
 void main() => runApp(App());
 
@@ -30,11 +32,14 @@ class App extends StatelessWidget {
 
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
-            return StreamProvider<MyUser>.value(
-              initialData: MyUser(),
-              value: AuthService().user,
-              child: Container(
-                child: Wrapper(),
+            return Provider<UserSettings>(
+              create: (_) => UserSettings(),
+              child: StreamProvider<MyUser>.value(
+                initialData: MyUser(),
+                value: AuthService().user,
+                child: Container(
+                  child: Wrapper(),
+                ),
               ),
             );
           }

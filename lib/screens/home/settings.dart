@@ -1,36 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopping_list/models/user.dart';
 import 'package:shopping_list/models/user_settings.dart';
 import 'package:shopping_list/services/auth.dart';
 import 'package:shopping_list/services/database.dart';
 import 'package:shopping_list/shared/constants.dart';
 
-class Settings extends StatefulWidget {
-  @override
-  _SettingsState createState() => _SettingsState();
-}
-
-class _SettingsState extends State<Settings> {
-  final AuthService _auth = AuthService();
+class SettingsScreen extends StatefulWidget {
 
   UserSettings userSettings;
-  MyUser myUser;
+
+  SettingsScreen({ this.userSettings });
+
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState(initUserSettings: userSettings);
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+
+  final AuthService _auth = AuthService();
+
+  UserSettings initUserSettings;
+
+  _SettingsScreenState({ this.initUserSettings });
+  
+
+  UserSettings userSettings;
   bool loaded = false;
   TextEditingController nameTextController = TextEditingController();
+  String useruid;
 
   void load() async {
     if (!loaded) {
-      myUser = _auth.getCurrentUser();
-      userSettings = await DatabaseService(uid: myUser.uid).readUserSettings();
+      userSettings = initUserSettings;
       loaded = true;
       setState(() {
-             nameTextController.text = userSettings.name;
-          });
+        nameTextController.text = userSettings.name;
+        useruid = userSettings.uid;    
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     load();
 
     return Scaffold(
@@ -76,9 +89,9 @@ class _SettingsState extends State<Settings> {
                 ),
               color: Colors.teal[200],
               onPressed: () async {
-                await DatabaseService(uid: myUser.uid)
+                await DatabaseService(uid: userSettings.uid)
                     .updateUserSettings(userSettings);
-                Navigator.pop(context);
+                Navigator.pop(context, userSettings);
               },
               child: Text('speichern'),
             ),

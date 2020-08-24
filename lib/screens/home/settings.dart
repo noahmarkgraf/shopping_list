@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shopping_list/models/user.dart';
 import 'package:shopping_list/models/user_settings.dart';
-import 'package:shopping_list/services/auth.dart';
 import 'package:shopping_list/services/database.dart';
 import 'package:shopping_list/shared/constants.dart';
 
 class SettingsScreen extends StatefulWidget {
 
-  UserSettings userSettings;
+  final UserSettings userSettings;
 
   SettingsScreen({ this.userSettings });
 
@@ -17,8 +14,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-
-  final AuthService _auth = AuthService();
 
   UserSettings initUserSettings;
 

@@ -17,16 +17,16 @@ class PurchaseTile extends StatelessWidget {
     UserSettings userSettings = Provider.of<UserSettings>(context);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 8.0),
+      padding: EdgeInsets.only(top: 8.0),
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
         child: ListTile(
-          leading: CircleAvatar(
-            radius: 20.0,
-            backgroundColor: Colors.teal[200],
-            child: Icon(Icons.shopping_basket, color: Colors.white),
-          ),
-          title: Text(purchase.name),
+          // leading: CircleAvatar(
+          //   radius: 20.0,
+          //   backgroundColor: Colors.teal[200],
+          //   child: Icon(Icons.shopping_basket, color: Colors.white),
+          // ),
+          title: Text(purchase.name, style: TextStyle(fontSize: 17),),
           subtitle: Text('von ${purchase.userName}\n${purchase.date}'),
           isThreeLine: true,
           trailing: IconButton(

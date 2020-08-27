@@ -87,7 +87,7 @@ class _RegisterState extends State<Register> {
               decoration: textInputDecoration.copyWith(hintText: 'Email'),
               validator: (val) => val.isEmpty ? 'Enter an email' : null,
               onChanged: (val) {
-                setState(() => email = val);
+                setState(() => email = val.trim());
               },
             ),
             SizedBox(height: 20.0),

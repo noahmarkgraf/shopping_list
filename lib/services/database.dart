@@ -77,4 +77,6 @@ class DatabaseService {
     return await purchaseCollection.doc(docId).delete();
   }
 
+  
+
 }

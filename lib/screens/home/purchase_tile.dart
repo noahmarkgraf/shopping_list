@@ -21,11 +21,7 @@ class PurchaseTile extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0),
         child: ListTile(
-          // leading: CircleAvatar(
-          //   radius: 20.0,
-          //   backgroundColor: Colors.teal[200],
-          //   child: Icon(Icons.shopping_basket, color: Colors.white),
-          // ),
+          // leading: Checkbox(),
           title: Text(purchase.name, style: TextStyle(fontSize: 17),),
           subtitle: Text('von ${purchase.userName}\n${purchase.date}'),
           isThreeLine: true,

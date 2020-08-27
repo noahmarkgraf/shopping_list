@@ -32,7 +32,7 @@ class _PurchaseListState extends State<PurchaseList> {
         },
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 5, 15),
+        padding: const EdgeInsets.fromLTRB(0, 0, 150, 15),
         child: FloatingActionButton(
           onPressed: (){
             showDialog(

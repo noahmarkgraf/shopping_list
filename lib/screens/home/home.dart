@@ -94,16 +94,11 @@ class _HomeState extends State<Home> {
                 ),
               ],
               bottom: TabBar(
+                labelPadding: EdgeInsets.only(bottom: 12),
                 tabs: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Text('zu erledigen', style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w400)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Text('erledigt', style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w400)),
-                  )],
-              ),
+                  Text('zu erledigen', style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w400)),
+                  Text('erledigt', style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w400)),
+                ]),
             ),
             body: FutureBuilder<UserSettings>(
               future: load(),

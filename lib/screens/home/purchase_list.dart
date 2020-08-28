@@ -31,49 +31,47 @@ class _PurchaseListState extends State<PurchaseList> {
           return PurchaseTile(purchase: purchases[index]);
         },
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 150, 15),
-        child: FloatingActionButton(
-          onPressed: (){
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  // title: Text('neuer Eintrag'),
-                  content: Form(
-                    key: _formKey,
-                    child: TextFormField(
-                      validator: (val) => val.isEmpty ? '???' : null,
-                      autofocus: true,
-                      onChanged: (String value) {
-                        inputName = value;
-                      },
-                    ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                // title: Text('neuer Eintrag'),
+                content: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    validator: (val) => val.isEmpty ? '???' : null,
+                    autofocus: true,
+                    onChanged: (String value) {
+                      inputName = value;
+                    },
                   ),
-                  actions: [
-                    IconButton(
-                      padding: EdgeInsets.fromLTRB(0, 0, 30, 30),
-                      onPressed: () async {
-                        if(_formKey.currentState.validate()) {
-                          Purchase purchase = Purchase();
-                          purchase.userName = userSettings.name;
-                          purchase.name = inputName;
-                          purchase.date = DateTime.now().day.toString()+'.'+DateTime.now().month.toString()+'.'+DateTime.now().year.toString()+
-                            ' - '+DateTime.now().hour.toString()+':'+DateTime.now().minute.toString();
-                          await DatabaseService(uid: userSettings.uid).purchasesUpdate(purchase);
-                          Navigator.pop(context);
-                        }
-                      },
-                      icon: Icon(Icons.add_circle, size: 40, color: Colors.teal[200],),
-                    )
-                  ],
-                );     
-              }
-            );
-          },
-          child: Icon(Icons.add, size: 40, color: Colors.white),
-          backgroundColor: Colors.teal[200],
-        ),
+                ),
+                actions: [
+                  IconButton(
+                    padding: EdgeInsets.fromLTRB(0, 0, 30, 30),
+                    onPressed: () async {
+                      if(_formKey.currentState.validate()) {
+                        Purchase purchase = Purchase();
+                        purchase.userName = userSettings.name;
+                        purchase.name = inputName;
+                        purchase.date = DateTime.now().day.toString()+'.'+DateTime.now().month.toString()+'.'+DateTime.now().year.toString()+
+                          ' - '+DateTime.now().hour.toString()+':'+DateTime.now().minute.toString();
+                        await DatabaseService(uid: userSettings.uid).purchasesUpdate(purchase);
+                        Navigator.pop(context);
+                      }
+                    },
+                    icon: Icon(Icons.add_circle, size: 40, color: Colors.teal[200],),
+                  )
+                ],
+              );     
+            }
+          );
+        },
+        child: Icon(Icons.add, size: 40, color: Colors.white),
+        backgroundColor: Colors.teal[200],
       ),
     );
   }

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/models/purchase.dart';
+import 'package:shopping_list/models/purchase_done.dart';
 import 'package:shopping_list/models/user_settings.dart';
+import 'package:shopping_list/screens/home/purchase_tile.dart';
 import 'package:shopping_list/services/database.dart';
 
-class PurchaseTile extends StatelessWidget {
 
-  final Purchase purchase;
+class PurchaseDoneTile extends StatelessWidget {
 
-  PurchaseTile({ this.purchase });
+  final PurchaseDone purchaseDone;
 
+  PurchaseDoneTile({ this.purchaseDone });
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +25,16 @@ class PurchaseTile extends StatelessWidget {
         child: ListTile(
           leading: IconButton(
             onPressed: () async {
-              await DatabaseService(uid: userSettings.uid).closePurchase(purchase);
+              await DatabaseService(uid: userSettings.uid).closePurchaseDone(purchaseDone);
             },
-            icon: Icon(Icons.check_box_outline_blank),
+            icon: Icon(Icons.check_box),
           ),
-          title: Text(purchase.name, style: TextStyle(fontSize: 17),),
-          subtitle: Text('von ${purchase.userName}\n${purchase.date}'),
+          title: Text(purchaseDone.name, style: TextStyle(fontSize: 17),),
+          subtitle: Text('von ${purchaseDone.userName}\n${purchaseDone.date}'),
           isThreeLine: true,
           trailing: IconButton(
             onPressed: (){
-              DatabaseService(uid: userSettings.uid).deletePurchase(purchase.id);
+              DatabaseService(uid: userSettings.uid).deletePurchaseDone(purchaseDone.id);
             },
             icon: Icon(Icons.delete, color: Colors.red),
           ),

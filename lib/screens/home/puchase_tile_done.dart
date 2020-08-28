@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_list/models/purchase.dart';
 import 'package:shopping_list/models/purchase_done.dart';
 import 'package:shopping_list/models/user_settings.dart';
-import 'package:shopping_list/screens/home/purchase_tile.dart';
 import 'package:shopping_list/services/database.dart';
 
 

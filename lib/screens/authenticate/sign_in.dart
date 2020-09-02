@@ -65,16 +65,16 @@ class _SignInState extends State<SignIn> {
             // SizedBox(height: 20.0),
             TextFormField(
               decoration: textInputDecoration.copyWith(hintText: 'Email'),
-              validator: (val) => val.isEmpty ? 'Enter an email' : null,
+              validator: (val) => val.isEmpty ? 'Geben Sie eine email an' : null,
               onChanged: (val) {
                 setState(() => email = val.trim());
               },
             ),
             SizedBox(height: 20.0),
             TextFormField(
-              decoration: textInputDecoration.copyWith(hintText: 'Password'),
+              decoration: textInputDecoration.copyWith(hintText: 'Passwort'),
               validator: (val) =>
-                  val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                  val.length < 6 ? 'Das Passwort muss mind. 6 Zeichen enthalten' : null,
               obscureText: true,
               onChanged: (val) {
                 setState(() => password = val);
@@ -98,7 +98,7 @@ class _SignInState extends State<SignIn> {
                       await _auth.signInWithEmailAndPassword(email, password);
                   if (result == null) {
                     setState(() {
-                      error = 'could not sign in';
+                      error = 'Anmeldung fehlgeschlagen';
                       loading = false;
                     });
                   }

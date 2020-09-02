@@ -14,6 +14,8 @@ class PurchaseDoneTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    String userSettingsUserName;
+
     UserSettings userSettings = Provider.of<UserSettings>(context);
 
     return Padding(
@@ -23,13 +25,14 @@ class PurchaseDoneTile extends StatelessWidget {
         child: ListTile(
           leading: IconButton(
             onPressed: () async {
-              await DatabaseService(uid: userSettings.uid).closePurchaseDone(purchaseDone);
+              userSettingsUserName = userSettings.name;
+              await DatabaseService(uid: userSettings.uid).closePurchaseDone(purchaseDone, userSettingsUserName);
             },
             icon: Icon(Icons.check_box),
           ),
           title: Text(purchaseDone.name, style: TextStyle(fontSize: 17),),
-          subtitle: Text('von ${purchaseDone.userName}\n${purchaseDone.date}'),
-          isThreeLine: true,
+          subtitle: Text('von ${purchaseDone.userName}'),
+          // isThreeLine: true,
           trailing: IconButton(
             onPressed: (){
               DatabaseService(uid: userSettings.uid).deletePurchaseDone(purchaseDone.id);

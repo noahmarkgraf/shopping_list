@@ -85,15 +85,15 @@ class _RegisterState extends State<Register> {
             SizedBox(height: 40.0),
             TextFormField(
               decoration: textInputDecoration.copyWith(hintText: 'Email'),
-              validator: (val) => val.isEmpty ? 'Enter an email' : null,
+              validator: (val) => val.isEmpty ? 'Geben Sie eine email an' : null,
               onChanged: (val) {
                 setState(() => email = val.trim());
               },
             ),
             SizedBox(height: 20.0),
             TextFormField(
-              decoration: textInputDecoration.copyWith(hintText: 'Password'),
-              validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+              decoration: textInputDecoration.copyWith(hintText: 'Passwort'),
+              validator: (val) => val.length < 6 ? 'Das Passwort muss mind. 6 Zeichen enthalten' : null,
               obscureText: true,
               onChanged: (val) {
                 setState(() => password = val);
@@ -102,7 +102,7 @@ class _RegisterState extends State<Register> {
             SizedBox(height: 20.0),
             TextFormField(
               decoration: textInputDecoration.copyWith(hintText: 'Name'),
-              validator: (val) => val.isEmpty ? 'Enter a name' : null,
+              validator: (val) => val.isEmpty ? 'Geben Sie einen Namen an' : null,
               onChanged: (val) {
                 setState(() => name = val);
               },
@@ -124,7 +124,7 @@ class _RegisterState extends State<Register> {
                   dynamic result = await _auth.registerWithEmailAndPassword(email, password, name);
                   if(result == null) {
                     setState(() {
-                      error = 'please supply a valid email';
+                      error = 'Bitte geben Sie eine gültige email-adresse an';
                       loading = false;
                     });
                   }

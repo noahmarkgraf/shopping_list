@@ -43,6 +43,7 @@ class _PurchaseListState extends State<PurchaseList> {
                   key: _formKey,
                   child: TextFormField(
                     validator: (val) => val.isEmpty ? '???' : null,
+                    textCapitalization: TextCapitalization.sentences,
                     autofocus: true,
                     onChanged: (String value) {
                       inputName = value;

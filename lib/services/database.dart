@@ -5,6 +5,7 @@ import 'package:shopping_list/models/user_settings.dart';
 
 class DatabaseService {
 
+
   final String uid;
   DatabaseService({ this.uid });
 
@@ -132,26 +133,26 @@ class DatabaseService {
 
 
   // push purchase to puchaseDone
-  Future closePurchase(Purchase purchase) async {
+  Future closePurchase(Purchase purchase, String userSettingsUserName) async {
     await deletePurchase(purchase.id);
     PurchaseDone purchaseDone = PurchaseDone();
     purchaseDone.name = purchase.name;
     purchaseDone.id = purchase.id;
     purchaseDone.date = purchase.date;
-    purchaseDone.userName = purchase.userName;
+    purchaseDone.userName = userSettingsUserName;
     return await purchasesDoneUpdate(purchaseDone);
   }
 
 
 
   // push purchaseDone to purchase
-  Future closePurchaseDone(PurchaseDone purchaseDone) async {
+  Future closePurchaseDone(PurchaseDone purchaseDone,  String userSettingsUserName) async {
     await deletePurchaseDone(purchaseDone.id);
     Purchase purchase = Purchase();
     purchase.name = purchaseDone.name;
     purchase.id = purchaseDone.id;
     purchase.date = purchaseDone.date;
-    purchase.userName = purchaseDone.userName;
+    purchase.userName = userSettingsUserName;
     return await purchasesUpdate(purchase);
   }
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shopping_list/models/purchase.dart';
 import 'package:shopping_list/models/purchase_done.dart';
 import 'package:shopping_list/models/user_settings.dart';
+import 'package:shopping_list/shared/datetime.dart';
 
 class DatabaseService {
 
@@ -136,9 +137,10 @@ class DatabaseService {
   Future closePurchase(Purchase purchase, String userSettingsUserName) async {
     await deletePurchase(purchase.id);
     PurchaseDone purchaseDone = PurchaseDone();
+    String _date = MyDateTime().convertString(DateTime.now());
     purchaseDone.name = purchase.name;
     purchaseDone.id = purchase.id;
-    purchaseDone.date = purchase.date;
+    purchaseDone.date = _date;
     purchaseDone.userName = userSettingsUserName;
     return await purchasesDoneUpdate(purchaseDone);
   }
@@ -149,9 +151,10 @@ class DatabaseService {
   Future closePurchaseDone(PurchaseDone purchaseDone,  String userSettingsUserName) async {
     await deletePurchaseDone(purchaseDone.id);
     Purchase purchase = Purchase();
+    String _date = MyDateTime().convertString(DateTime.now());
     purchase.name = purchaseDone.name;
     purchase.id = purchaseDone.id;
-    purchase.date = purchaseDone.date;
+    purchase.date = _date;
     purchase.userName = userSettingsUserName;
     return await purchasesUpdate(purchase);
   }

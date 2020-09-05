@@ -31,8 +31,8 @@ class PurchaseDoneTile extends StatelessWidget {
             icon: Icon(Icons.check_box),
           ),
           title: Text(purchaseDone.name, style: TextStyle(fontSize: 17),),
-          subtitle: Text('von ${purchaseDone.userName}'),
-          // isThreeLine: true,
+          subtitle: Text('von ${purchaseDone.userName}\n${purchaseDone.date}'),
+          isThreeLine: true,
           trailing: IconButton(
             onPressed: (){
               DatabaseService(uid: userSettings.uid).deletePurchaseDone(purchaseDone.id);

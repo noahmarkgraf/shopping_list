@@ -4,6 +4,7 @@ import 'package:shopping_list/models/purchase.dart';
 import 'package:shopping_list/models/user_settings.dart';
 import 'package:shopping_list/screens/home/purchase_tile.dart';
 import 'package:shopping_list/services/database.dart';
+import 'package:shopping_list/shared/datetime.dart';
 
 
 class PurchaseList extends StatefulWidget {
@@ -58,8 +59,7 @@ class _PurchaseListState extends State<PurchaseList> {
                         Purchase purchase = Purchase();
                         purchase.userName = userSettings.name;
                         purchase.name = inputName;
-                        purchase.date = DateTime.now().day.toString()+'.'+DateTime.now().month.toString()+'.'+DateTime.now().year.toString()+
-                          ' - '+DateTime.now().hour.toString()+':'+DateTime.now().minute.toString();
+                        purchase.date = MyDateTime().convertString(DateTime.now());
                         await DatabaseService(uid: userSettings.uid).purchasesUpdate(purchase);
                         Navigator.pop(context);
                       }

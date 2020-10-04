@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list/screens/load_userSettings.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/models/user.dart';
 import 'package:shopping_list/screens/authenticate/authenticate.dart';
-import 'package:shopping_list/screens/home/home.dart';
 import 'package:shopping_list/shared/loading.dart';
 
 class Wrapper extends StatelessWidget {
@@ -19,7 +19,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return LoadUserSettings();
     }
   }
 }
